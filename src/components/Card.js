@@ -13,11 +13,13 @@ export const Card = () => {
 			{loading ? (
 				<div>Cargando</div>
 			) : pokemons && pokemons.length > 0 ? (
-				<ul>
+				<div>
 					{pokemons.map((pokemon) => (
-						<li key={1 + 1}>{pokemon.name}</li>
+						<div key={pokemon.id}>
+							<img src={pokemon.sprites.front_default} alt={pokemon.name} />
+						</div>
 					))}
-				</ul>
+				</div>
 			) : (
 				<div>No pokemons</div>
 			)}
