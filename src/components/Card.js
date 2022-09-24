@@ -1,28 +1,50 @@
-import { usePokemons } from '../hooks/usePokemons';
+import { useState, useEffect } from 'react';
 
-import './Card.css';
-import { Error } from './Error';
+import styles from './Card.module.css';
+import pokeballImg from '../assets/images/pokeball.png';
 
-export const Card = () => {
-	const { pokemons, loading, error } = usePokemons(4);
+const Card = ({ pokemon }) => {
+	const [down, setDown] = useState(false);
+	// const [burned, setBurned] = useState(false);
 
-	if (error) return <Error />;
+	pokemon.facedown = down;
+	// pokemon.burned = burned;
+
+	useEffect(() => {
+		setTimeout(() => {
+			setDown(!down);
+		}, 3000);
+	}, []);
+
+	const faceUP = () => {
+		setDown(!down);
+	};
 
 	return (
-		<div>
-			{loading ? (
-				<div>Cargando</div>
-			) : pokemons && pokemons.length > 0 ? (
+		<>
+			{pokemon.facedown ? (
 				<div>
-					{pokemons.map((pokemon) => (
-						<div key={pokemon.id}>
-							<img src={pokemon.sprites.front_default} alt={pokemon.name} />
-						</div>
-					))}
+					<img
+						onClick={faceUP}
+						className={styles.pokeball}
+						src={pokeballImg}
+						alt="pokeball"
+					/>
 				</div>
 			) : (
-				<div>No pokemons</div>
+				<div className={styles.container}>
+					<div className={styles.photo}>
+						<div className={styles.circle}>
+							<img src={pokemon.sprites.front_default} alt={pokemon.name} />
+						</div>
+					</div>
+					<div className={styles.body}>
+						<h1>{pokemon.name}</h1>
+					</div>
+				</div>
 			)}
-		</div>
+		</>
 	);
 };
+
+export { Card };
