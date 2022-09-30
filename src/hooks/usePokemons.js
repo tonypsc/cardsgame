@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
 import { fetchData } from '../api';
-
 import { RandomNumber } from '../helpers/RandomNumber';
+import { ShuffleArray } from '../helpers/ShuffleArray';
 
 const usePokemons = (cantMax) => {
 	const [pokemons, setPokemons] = useState([]);
@@ -17,13 +17,14 @@ const usePokemons = (cantMax) => {
 
 				while (pokes.length < cantMax) {
 					const result = await fetchData(RandomNumber(1, 151));
-					// result.facedown = true;
-					// result.burned = false;
 					if (!pokes.find((arr) => arr.name === result.name))
 						pokes.push(result);
 				}
 
-				setPokemons(pokes);
+				const data = [...pokes, ...pokes];
+				const result = ShuffleArray(data);
+
+				setPokemons(result);
 				setError(null);
 				setLoading(false);
 			} catch (error) {

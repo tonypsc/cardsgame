@@ -1,58 +1,53 @@
-.container {
-	width: 15rem;
-	height: 17rem;
-	display: flex;
-	align-items: center;
+.card {
+	width: 200px;
+	height: 277px;
 	border-radius: 10px;
-	background-color: aliceblue;
+}
+
+.cardFront {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background: yellow;
+}
+
+.cardFrontContent {
+	width: 180px;
+	height: 255px;
+	background-color: blueviolet;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	flex-direction: column;
 }
 
-.pokeball {
-	width: 200px;
-	height: 200px;
-	border-radius: 50%;
+.cardBack img {
+	width: 100%;
+	height: 100%;
 	cursor: pointer;
 }
 
-.photo {
+.pokemonPhoto {
+	height: 90%;
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.pokemonPhoto img {
+	width: 100%;
+	height: 100%;
+}
+
+.pokemonData {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 	background-color: aqua;
-	width: 100%;
-	height: 70%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-
-.circle {
-	width: 160px;
-	height: 160px;
-	border-radius: 50%;
-	background-color: aliceblue;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.photo img {
-	width: 200px;
-	height: 200px;
-}
-
-.body {
-	height: 30%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.body h1 {
-	color: grey;
-}
-
-.body ul {
-	list-style: none;
 }

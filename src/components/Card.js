@@ -1,49 +1,37 @@
-import { useState, useEffect } from 'react';
-
 import styles from './Card.module.css';
-import pokeballImg from '../assets/images/pokeball.png';
+import pokeballImg from '../assets/images/card-back.png';
 
-const Card = ({ pokemon }) => {
-	const [down, setDown] = useState(false);
-	// const [burned, setBurned] = useState(false);
-
-	pokemon.facedown = down;
-	// pokemon.burned = burned;
-
-	useEffect(() => {
-		setTimeout(() => {
-			setDown(!down);
-		}, 3000);
-	}, []);
-
-	const faceUP = () => {
-		setDown(!down);
-	};
-
+const Card = ({ pokemon, status, onClick, index }) => {
 	return (
-		<>
-			{pokemon.facedown ? (
-				<div>
-					<img
-						onClick={faceUP}
-						className={styles.pokeball}
-						src={pokeballImg}
-						alt="pokeball"
-					/>
-				</div>
-			) : (
-				<div className={styles.container}>
-					<div className={styles.photo}>
-						<div className={styles.circle}>
-							<img src={pokemon.sprites.front_default} alt={pokemon.name} />
+		<div className={styles.cardContainer}>
+			<div className={styles.card}>
+				{status === 'normal' ? (
+					<div className={styles.cardBack}>
+						<img
+							onClick={(e) => onClick(e.target.name, index)}
+							src={pokeballImg}
+							alt="back-img"
+							name={pokemon.name}
+						/>
+					</div>
+				) : (
+					<div className={styles.cardFront}>
+						<div className={styles.cardFrontContent}>
+							<div className={styles.pokemonData}>
+								<h3>{pokemon.name}</h3>
+								<h4>HP {pokemon.stats[0].base_stat}</h4>
+							</div>
+							<div className={styles.pokemonPhoto}>
+								<img
+									src={pokemon.sprites.other.dream_world.front_default}
+									alt="pokemon-img"
+								/>
+							</div>
 						</div>
 					</div>
-					<div className={styles.body}>
-						<h1>{pokemon.name}</h1>
-					</div>
-				</div>
-			)}
-		</>
+				)}
+			</div>
+		</div>
 	);
 };
 
