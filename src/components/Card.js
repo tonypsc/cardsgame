@@ -17,10 +17,6 @@ const Card = ({ pokemon, status, onClick, index }) => {
 				) : (
 					<div className={styles.cardFront}>
 						<div className={styles.cardFrontContent}>
-							<div className={styles.pokemonData}>
-								<h3>{pokemon.name}</h3>
-								<h4>HP {pokemon.stats[0].base_stat}</h4>
-							</div>
 							<div className={styles.pokemonPhoto}>
 								<img
 									src={pokemon.sprites.other.dream_world.front_default}

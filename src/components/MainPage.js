@@ -33,7 +33,6 @@ const MainPage = () => {
 
 	return (
 		<div className={styles.app}>
-			<div className={styles.header}>{/* <a href="#">Back</a> */}</div>
 			<div className={styles.body}>
 				{loading ? (
 					<div>Loading...</div>
