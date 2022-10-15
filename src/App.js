@@ -1,7 +1,8 @@
-import { Card } from './components/Card';
+// import { LevelPage } from './components/LevelPage';
+import { MainPage } from './components/MainPage';
 
 function App() {
-	return <Card />;
+	return <MainPage />;
 }
 
 export default App;
