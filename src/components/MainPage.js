@@ -43,11 +43,15 @@ const MainPage = () => {
 		}
 	};
 
+	const reload = () => {
+		window.location.reload(true);
+	};
+
 	return (
 		<div className={styles.app}>
 			<div className={styles.header}>
 				<h1>Pokemon Card</h1>
-				<button>New Game</button>
+				<button onClick={reload}>New Game</button>
 			</div>
 			<div className={styles.body}>
 				{loading ? (
