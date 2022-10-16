@@ -7,7 +7,7 @@ import { Error } from './Error';
 import styles from './MainPage.module.css';
 
 const MainPage = () => {
-	const { pokemons, loading, error } = usePokemons(6);
+	const { pokemons, loading, error, reload } = usePokemons();
 	const [turns, setTurns] = useState(0);
 	const [selectedOne, setSelectedOne] = useState(null);
 	const [selectedTwo, setSelectedTwo] = useState(null);
@@ -43,15 +43,16 @@ const MainPage = () => {
 		}
 	};
 
-	const reload = () => {
-		window.location.reload(true);
+	const newgame = () => {
+		reload();
+		setTurns(0);
 	};
 
 	return (
 		<div className={styles.app}>
 			<div className={styles.header}>
 				<h1>Pokemon Card</h1>
-				<button onClick={reload}>New Game</button>
+				<button onClick={newgame}>New Game</button>
 			</div>
 			<div className={styles.body}>
 				{loading ? (
