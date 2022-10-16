@@ -13,6 +13,7 @@ const MainPage = () => {
 	const [selectedTwo, setSelectedTwo] = useState(null);
 	const [count, setCount] = useState(1);
 	const [burned, setBurned] = useState([]);
+	const [disabled, setDisabled] = useState(false);
 
 	const resetStates = () => {
 		setTurns((prevTurns) => prevTurns + 1);
@@ -21,6 +22,7 @@ const MainPage = () => {
 			setSelectedOne(null);
 			setSelectedTwo(null);
 			setCount(1);
+			setDisabled(false);
 		}, 1000);
 	};
 
@@ -36,6 +38,7 @@ const MainPage = () => {
 		if (selectedOne && selectedOne.name === name) setBurned([...burned, name]);
 
 		if (count === 2) {
+			setDisabled(true);
 			resetStates();
 		}
 	};
@@ -76,6 +79,7 @@ const MainPage = () => {
 								onClick={handleClick}
 								index={index}
 								status={status}
+								disabled={disabled}
 							/>
 						);
 					})

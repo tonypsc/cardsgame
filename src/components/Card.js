@@ -1,7 +1,7 @@
 import styles from './Card.module.css';
 import pokeballImg from '../assets/images/card-back.png';
 
-const Card = ({ pokemon, onClick, index, status }) => {
+const Card = ({ pokemon, onClick, index, status, disabled }) => {
 	return (
 		<div
 			className={
@@ -20,10 +20,11 @@ const Card = ({ pokemon, onClick, index, status }) => {
 				}
 			>
 				<img
-					onClick={(e) => onClick(e.target.name, index)}
+					onClick={!disabled ? (e) => onClick(e.target.name, index) : null}
 					src={pokeballImg}
 					alt="back-img"
 					name={pokemon.name}
+					className={!disabled ? styles.cursorPointer : ''}
 				/>
 			</div>
 		</div>
