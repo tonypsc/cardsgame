@@ -7,55 +7,75 @@ import { Error } from './Error';
 import styles from './MainPage.module.css';
 
 const MainPage = () => {
-	const { pokemons, loading, error } = usePokemons(5);
-	const [initializer, setInitializer] = useState(true);
-	const [selected, setSelected] = useState();
+	const { pokemons, loading, error } = usePokemons(6);
+	const [turns, setTurns] = useState(0);
+	const [selectedOne, setSelectedOne] = useState(null);
+	const [selectedTwo, setSelectedTwo] = useState(null);
+	const [count, setCount] = useState(1);
 	const [burned, setBurned] = useState([]);
+
+	const resetStates = () => {
+		setTurns((prevTurns) => prevTurns + 1);
+
+		setTimeout(() => {
+			setSelectedOne(null);
+			setSelectedTwo(null);
+			setCount(1);
+		}, 1000);
+	};
 
 	if (error) return <Error error={error} />;
 
-	if (initializer) {
-		setTimeout(() => {
-			setInitializer(false);
-		}, 3000);
-	}
-
 	const handleClick = (name, index) => {
-		if (!selected) {
-			setSelected({ name, index });
-			return;
+		setCount((prevCount) => prevCount + 1);
+
+		selectedOne
+			? setSelectedTwo({ name, index })
+			: setSelectedOne({ name, index });
+
+		if (selectedOne && selectedOne.name === name) setBurned([...burned, name]);
+
+		if (count === 2) {
+			resetStates();
 		}
-
-		if (selected.name === name) setBurned([...burned, name]);
-
-		setSelected();
 	};
 
 	return (
 		<div className={styles.app}>
+			<div className={styles.header}>
+				<h1>Pokemon Card</h1>
+				<button>New Game</button>
+			</div>
 			<div className={styles.body}>
 				{loading ? (
 					<div>Loading...</div>
 				) : pokemons && pokemons.length > 0 ? (
 					pokemons.map((pokemon, index) => {
-						let status = 'flipped';
-						if (!initializer) {
-							status = 'normal';
-							if (
-								selected &&
-								pokemon.name === selected.name &&
-								index === selected.index
-							)
-								status = 'flipped';
-							if (burned.find((pok) => pok === pokemon.name)) status = 'burned';
-						}
+						let status = 'normal';
+
+						if (
+							selectedOne &&
+							pokemon.name === selectedOne.name &&
+							index === selectedOne.index
+						)
+							status = 'flipped';
+
+						if (
+							selectedTwo &&
+							pokemon.name === selectedTwo.name &&
+							index === selectedTwo.index
+						)
+							status = 'flipped';
+
+						if (burned.find((name) => name === pokemon.name)) status = 'burned';
+
 						return (
 							<Card
 								key={pokemon.name + index}
 								pokemon={pokemon}
-								status={status}
 								onClick={handleClick}
 								index={index}
+								status={status}
 							/>
 						);
 					})
@@ -63,6 +83,7 @@ const MainPage = () => {
 					<div>No data</div>
 				)}
 			</div>
+			<div className={styles.footer}>Turns: {turns}</div>
 		</div>
 	);
 };

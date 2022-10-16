@@ -5,3 +5,8 @@
 	align-items: center;
 	flex-direction: column;
 }
+
+h1,
+h5 {
+	color: #000000;
+}
