@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { usePokemons } from '../hooks/usePokemons';
 import { Card } from './Card';
+import { SkeletonLoader } from './SkeletonLoader';
 import { Error } from './Error';
 import { SkeletonLoader } from './SkeletonLoader';
 

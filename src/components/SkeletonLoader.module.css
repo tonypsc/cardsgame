@@ -1,0 +1,22 @@
+.card {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	gap: 1rem;
+}
+
+.back {
+	width: 150px;
+	height: 150px;
+	background: grey;
+	border-radius: 10px;
+	animation: skeleton-animation 0.5s infinite alternate;
+}
+
+@keyframes skeleton-animation {
+	0% {
+		background: rgb(198, 187, 187);
+	}
+	100% {
+		background: rgb(155, 141, 141);
+	}
+}
