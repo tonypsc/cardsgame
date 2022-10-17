@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { usePokemons } from '../hooks/usePokemons';
 import { Card } from './Card';
+import { SkeletonLoader } from './SkeletonLoader';
 import { Error } from './Error';
 
 import styles from './MainPage.module.css';
@@ -56,7 +57,7 @@ const MainPage = () => {
 			</div>
 			<div className={styles.body}>
 				{loading ? (
-					<div>Loading...</div>
+					<SkeletonLoader />
 				) : pokemons && pokemons.length > 0 ? (
 					pokemons.map((pokemon, index) => {
 						let status = 'normal';
